@@ -1,14 +1,31 @@
+import { ITodo, deleteTodo, setTodo } from "@/redux/features/todo/todoSlice";
 import { Button } from "../ui/button";
+import { useAppDispatch } from "@/redux/hooks";
 
-const TodoCard = () => {
+const TodoCard = ({ id, title, description, isCompleted }: Partial<ITodo>) => {
+  const dispatch = useAppDispatch();
+  const handleChangeStatus = () => {
+    dispatch(setTodo(id));
+  };
   return (
     <div className="flex items-center justify-between rounded-md p-3 border border-gray-600">
-      <input type="checkbox" name="" id="" />
-      <p className="text-xl font-medium text-white font-serif">Todo Title</p>
-      <p className="text-xl font-medium text-white font-serif">Time</p>
-      <p className="text-xl font-medium text-white font-serif">Description</p>
+      <input onChange={handleChangeStatus} type="checkbox" name="" id="" />
+      <p className="text-xl font-medium text-gray-800 font-serif">{title}</p>
+      {/* <p className="text-xl font-medium text-gray-800 font-serif">Time</p> */}
+
+      <div>
+        <p className={`${isCompleted ? "text-green-700" : "text-red-700"}`}>
+          {isCompleted ? "Done" : "Pending"}
+        </p>
+      </div>
+      <p className="text-xl font-medium text-gray-800 font-serif">
+        {description}
+      </p>
       <div className="space-x-5">
-        <Button className="bg-red-700 rounded text-white font-medium h-8 px-5 font-mono">
+        <Button
+          onClick={() => dispatch(deleteTodo(id))}
+          className="bg-red-700 rounded text-gray-800 font-medium h-8 px-5 font-mono"
+        >
           <svg
             className="size-5"
             data-slot="icon"
