@@ -11,7 +11,7 @@ import {
 } from "../ui/dropdown-menu";
 
 const FilterTodo = () => {
-  const [position, setPosition] = useState("bottom");
+  const [position, setPosition] = useState("Low");
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -24,9 +24,9 @@ const FilterTodo = () => {
         <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="High">High</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="Medium">Medium</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="Low">Low</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
