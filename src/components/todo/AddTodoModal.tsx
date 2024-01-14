@@ -15,10 +15,19 @@ import { Label } from "../ui/label";
 // import { useAppDispatch } from "@/redux/hooks";
 // import { addTodo } from "@/redux/features/todo/todoSlice";
 import { useAddTodoMutation } from "@/api/api";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 const AddTodoModal = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState("Low");
   // use on local state
   // const dispatch = useAppDispatch();
   const [
@@ -38,6 +47,8 @@ const AddTodoModal = () => {
       // id,
       title,
       description,
+      priority,
+      isCompleted: false,
     };
     // use on local state
     // dispatch(addTodo(todo));
@@ -83,7 +94,28 @@ const AddTodoModal = () => {
               />
             </div>
           </div>
-          <DialogFooter>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="priority" className="text-right">
+              Priority
+            </Label>
+            <Select
+              value={priority}
+              onValueChange={(value) => setPriority(value)}
+            >
+              <SelectTrigger className="col-span-3">
+                <SelectValue placeholder="Select Priority" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="High">High</SelectItem>
+                  <SelectItem value="Medium">Medium</SelectItem>
+                  <SelectItem value="Low">Low</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <DialogFooter className="mt-5">
             <DialogClose asChild>
               <Button type="submit">Save changes</Button>
             </DialogClose>

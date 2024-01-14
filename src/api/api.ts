@@ -10,11 +10,14 @@ export const todoApi = createApi({
       query: () => ({ url: "/todos", method: "GET" }),
     }),
     addTodo: builder.mutation({
-      query: (todo) => ({
-        url: "/addTodo",
-        method: "POST",
-        body: todo,
-      }),
+      query: (todo) => {
+        console.log(todo);
+        return {
+          url: "/addTodo",
+          method: "POST",
+          body: todo,
+        };
+      },
     }),
   }),
 });
