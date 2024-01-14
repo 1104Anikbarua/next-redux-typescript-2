@@ -8,9 +8,10 @@ import { Skeleton } from "../ui/skeleton";
 import { useState } from "react";
 
 const TodoContainer = () => {
-  const [priority, setPriority] = useState("Low");
+  const [priority, setPriority] = useState("");
+
   // const { todos } = useAppSelector((state) => state.todo);
-  const { isLoading, data } = useGetTodosQuery(undefined);
+  const { isLoading, data } = useGetTodosQuery(priority);
   return (
     <div className="mt-1">
       <div className="flex justify-between mb-5">

@@ -8,7 +8,18 @@ export const todoApi = createApi({
   tagTypes: ["todo"],
   endpoints: (builder) => ({
     getTodos: builder.query({
-      query: () => ({ url: "/todos", method: "GET" }),
+      query: (priority) => {
+        //if priority is string then if condition is not executed and load all the todos
+        const params = new URLSearchParams();
+        if (priority) {
+          params.append("priority", priority);
+        }
+        return {
+          url: `/todos`,
+          method: "GET",
+          params: params, //params is object thats why we don't use curly braces
+        };
+      },
       providesTags: ["todo"],
     }),
     addTodo: builder.mutation({
