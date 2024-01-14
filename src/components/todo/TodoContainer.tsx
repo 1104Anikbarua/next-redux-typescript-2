@@ -9,7 +9,6 @@ import { Skeleton } from "../ui/skeleton";
 const TodoContainer = () => {
   // const { todos } = useAppSelector((state) => state.todo);
   const { isLoading, data } = useGetTodosQuery(undefined);
-  // console.log(data);
   return (
     <div className="mt-1">
       <div className="flex justify-between mb-5">
