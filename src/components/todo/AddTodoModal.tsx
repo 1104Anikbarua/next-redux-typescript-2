@@ -28,6 +28,7 @@ const AddTodoModal = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("Low");
+
   // use on local state
   // const dispatch = useAppDispatch();
   const [addTodo, { isLoading }] = useAddTodoMutation();

@@ -5,8 +5,10 @@ import AddTodoModal from "./AddTodoModal";
 import FilterTodo from "./FilterTodo";
 import TodoCard, { TTodo } from "./TodoCard";
 import { Skeleton } from "../ui/skeleton";
+import { useState } from "react";
 
 const TodoContainer = () => {
+  const [priority, setPriority] = useState("Low");
   // const { todos } = useAppSelector((state) => state.todo);
   const { isLoading, data } = useGetTodosQuery(undefined);
   return (
@@ -19,7 +21,7 @@ const TodoContainer = () => {
         {/* <Button className="bg-primary-gradient text-xl font-medium font-serif">
           Filter Todo
         </Button> */}
-        <FilterTodo />
+        <FilterTodo priority={priority} setPriority={setPriority} />
       </div>
       <div className="bg-primary-gradient w-full h-full mt-1 rounded-md p-[5px] space-y-5">
         {/* <div className="bg-white p-3 text-center font-semibold text-2xl font-mono">

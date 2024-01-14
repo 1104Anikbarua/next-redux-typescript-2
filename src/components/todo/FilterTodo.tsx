@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -10,8 +9,12 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 
-const FilterTodo = () => {
-  const [position, setPosition] = useState("Low");
+type TProps = {
+  priority: string;
+  setPriority: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const FilterTodo = ({ priority, setPriority }: TProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -21,12 +24,20 @@ const FilterTodo = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
+        <DropdownMenuLabel className="text-center font-mono font-semibold text-xl">
+          Priority
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value="High">High</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="Medium">Medium</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="Low">Low</DropdownMenuRadioItem>
+        <DropdownMenuRadioGroup value={priority} onValueChange={setPriority}>
+          <DropdownMenuRadioItem className="font-mono" value="High">
+            High
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem className="font-mono" value="Medium">
+            Medium
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem className="font-mono" value="Low">
+            Low
+          </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
