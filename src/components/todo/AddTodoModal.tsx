@@ -12,27 +12,38 @@ import {
 } from "../ui/dialog";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { useAppDispatch } from "@/redux/hooks";
-import { addTodo } from "@/redux/features/todo/todoSlice";
+// import { useAppDispatch } from "@/redux/hooks";
+// import { addTodo } from "@/redux/features/todo/todoSlice";
+import { useAddTodoMutation } from "@/api/api";
 
 const AddTodoModal = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  // use on local state
+  // const dispatch = useAppDispatch();
+  const [
+    addTodo,
+    { isError, isLoading, isSuccess, isUninitialized, error, data },
+  ] = useAddTodoMutation();
 
-  const dispatch = useAppDispatch();
-
+  console.log({ isError, isLoading, isSuccess, isUninitialized, error, data });
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     setTitle(title);
     setDescription(description);
-
-    const id = Math.random().toString(36).substring(2, 7);
+    // use on local state
+    // const id = Math.random().toString(36).substring(2, 7);
     const todo = {
-      id,
+      // because mongodb automatically generate a id for us in the server
+      // id,
       title,
       description,
     };
-    dispatch(addTodo(todo));
+    // use on local state
+    // dispatch(addTodo(todo));
+
+    // send todo data to the server
+    addTodo(todo);
   };
   return (
     <Dialog>
