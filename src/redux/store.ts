@@ -7,6 +7,8 @@ export const store = configureStore({
     todo: todoReducer,
     [todoApi.reducerPath]: todoApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(todoApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

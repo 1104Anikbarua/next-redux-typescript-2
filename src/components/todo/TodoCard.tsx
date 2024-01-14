@@ -1,24 +1,61 @@
-import { ITodo, deleteTodo, setTodo } from "@/redux/features/todo/todoSlice";
+import {
+  // ITodo,
+  deleteTodo,
+  setTodo,
+} from "@/redux/features/todo/todoSlice";
 import { Button } from "../ui/button";
 import { useAppDispatch } from "@/redux/hooks";
 
-const TodoCard = ({ id, title, description, isCompleted }: Partial<ITodo>) => {
+export type TTodo = {
+  _id: string;
+  title: string;
+  description: string;
+  isCompleted: boolean;
+  priority: string;
+};
+
+const TodoCard = ({
+  _id: id,
+  title,
+  description,
+  isCompleted,
+  priority,
+}: Partial<TTodo>) => {
   const dispatch = useAppDispatch();
   const handleChangeStatus = () => {
     dispatch(setTodo(id));
   };
   return (
     <div className="flex items-center justify-between rounded-md p-3 border border-gray-600">
-      <input onChange={handleChangeStatus} type="checkbox" name="" id="" />
-      <p className="text-xl font-medium text-gray-800 font-serif">{title}</p>
-      {/* <p className="text-xl font-medium text-gray-800 font-serif">Time</p> */}
+      <input
+        className="mr-2"
+        onChange={handleChangeStatus}
+        type="checkbox"
+        name=""
+        id=""
+      />
+      <p className="flex-1 text-xl font-medium text-gray-800 font-serif">
+        {title}
+      </p>
 
-      <div>
-        <p className={`${isCompleted ? "text-green-700" : "text-red-700"}`}>
-          {isCompleted ? "Done" : "Pending"}
-        </p>
+      <div className="flex items-center flex-1">
+        <p
+          className={`size-5 rounded-full mr-1
+      ${priority === "High" ? "bg-red-600" : ""}
+      ${priority === "Medium" ? "bg-yellow-600" : ""}
+      ${priority === "Low" ? "bg-green-600" : ""}
+      
+      `}
+        ></p>
+        <p className="text-lg font-mono">{priority}</p>
       </div>
-      <p className="text-xl font-medium text-gray-800 font-serif">
+      <p
+        className={`flex-1 ${isCompleted ? "text-green-700" : "text-red-700"}`}
+      >
+        {isCompleted ? "Done" : "Pending"}
+      </p>
+
+      <p className="flex-1 text-xl font-medium text-gray-800 font-serif">
         {description}
       </p>
       <div className="space-x-5">

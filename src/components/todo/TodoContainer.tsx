@@ -1,11 +1,15 @@
 // import { Button } from "../ui/button";
-import { useAppSelector } from "@/redux/hooks";
+// import { useAppSelector } from "@/redux/hooks";
+import { useGetTodosQuery } from "@/api/api";
 import AddTodoModal from "./AddTodoModal";
 import FilterTodo from "./FilterTodo";
-import TodoCard from "./TodoCard";
+import TodoCard, { TTodo } from "./TodoCard";
+import { Skeleton } from "../ui/skeleton";
 
 const TodoContainer = () => {
-  const { todos } = useAppSelector((state) => state.todo);
+  // const { todos } = useAppSelector((state) => state.todo);
+  const { isLoading, data } = useGetTodosQuery(undefined);
+  console.log(data);
   return (
     <div className="mt-1">
       <div className="flex justify-between mb-5">
@@ -23,11 +27,21 @@ const TodoContainer = () => {
           No Todo Remaining
         </div> */}
 
-        <div className="bg-white w-full h-full space-y-3 p-1 rounded-md">
-          {todos?.map((todo) => (
-            <TodoCard {...todo} key={todo?.id} />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="flex items-center justify-center">
+            <Skeleton className="h-12 w-12 rounded-full" />
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-[200px]" />
+            </div>
+          </div>
+        ) : (
+          <div className="bg-white w-full h-full space-y-3 p-1 rounded-md">
+            {data["data"]?.map((todo: TTodo) => (
+              <TodoCard {...todo} key={todo?._id} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
