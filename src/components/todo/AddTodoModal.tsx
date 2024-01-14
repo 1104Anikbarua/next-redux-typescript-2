@@ -116,7 +116,7 @@ const AddTodoModal = () => {
               <Button type="submit">
                 {isLoading ? (
                   <svg
-                    className="animate-spin"
+                    className="animate-spin size-5"
                     data-slot="icon"
                     fill="none"
                     strokeWidth="1.5"
